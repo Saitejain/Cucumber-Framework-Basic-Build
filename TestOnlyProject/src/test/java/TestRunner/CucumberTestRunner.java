@@ -1,12 +1,19 @@
 package TestRunner;
 
-import io.cucumber.core.cli.Main;
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
 
-@SuppressWarnings("unused")
-@CucumberOptions(features = "src\\test\\resource\\Features", glue = "src\\test\\java\\StepDefinitions\\LoginPageStepDefinition", plugin = "pretty",monochrome=true)
-
-public class CucumberTestRunner extends AbstractTestNGCucumberTests{
-
+@CucumberOptions(
+        features = "src/test/resources/features",
+        glue = {"StepDefinitions", "appHooks"},
+        plugin = {
+                "pretty",
+                "html:target/cucumber-report.html",
+                "json:target/cucumber-report.json",
+                "junit:target/cucumber-report.xml"
+        },
+        monochrome = true,
+        publish = false
+)
+public class CucumberTestRunner extends AbstractTestNGCucumberTests {
 }
